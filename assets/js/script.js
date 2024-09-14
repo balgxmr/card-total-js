@@ -21,11 +21,27 @@ btnAumentar.addEventListener("click", () => {
   cantidad += 1;
   cantidadSpan.innerHTML = cantidad;
   actualizarTotal();
+
+  // Activamos el botón de decremento ya que la cantidad será > 0
+  btnDecremento.disabled = false;
 });
 
 // Decrementar cantidad en evento click al botón y llamar a actualizarTotal()
 btnDecremento.addEventListener("click", () => {
-  cantidad -= 1;
-  cantidadSpan.innerHTML = cantidad;
-  actualizarTotal();
+  // Verificamos que la cantidad sea mayor a 0
+  if (cantidad > 0) {
+    cantidad -= 1;
+    cantidadSpan.innerHTML = cantidad;
+    actualizarTotal();
+
+    // Cuando la cantidad llegue a 0, desactivar btnDecremento
+    if (cantidad == 0) {
+      btnDecremento.disabled = true;
+    }
+  }
 });
+
+// Desactivamos btnDecremento inicialmente ya que cantidad inicia en 0
+if (cantidad == 0) {
+  btnDecremento.disabled = true;
+}
